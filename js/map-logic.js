@@ -332,9 +332,9 @@ function addGourmetMarker(shop, location, reviews) {
 
             <div style="width: 180px; flex-shrink: 0;">
                 <img src="${imagePath}" 
-                     alt="${shop.name}" 
-                     style="width: 100%; height: 160px; object-fit: cover; border-radius: 6px;"
-                     onerror="this.style.display='none';"
+                    alt="${shop.name}" 
+                    style="width: 100%; height: 160px; object-fit: cover; border-radius: 6px;"
+                    onerror="this.style.display='none';"
                 >
             </div>
 

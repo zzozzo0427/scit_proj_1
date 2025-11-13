@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日本のグルメ マップ - リスト検索</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/list-styles.css"> 
+</head>
+<body>
+    <div class="container mx-auto px-4 py-6">
+        
+        <header class="mb-6 flex justify-between items-center">
+            <div class="flex items-center space-x-8"> 
+                <h1 class="text-3xl font-bold text-gray-800">
+                    <span class="text-red-500">日本のグルメ</span> マップ
+                </h1>
+
+                <nav class="flex space-x-6">
+                    <a href="/map.html" class="text-lg font-medium text-gray-500 hover:text-red-500 transition duration-150 pb-1">マップ検索</a>
+                    <a href="list.html" class="text-lg font-bold text-red-500 border-b-2 border-red-500 pb-1">リスト検索</a>
+                </nav>
+            </div>
+            
+            <div id="authContainer" class="flex items-center">
+                
+                <div id="logoutInfo" class="flex space-x-3 items-center">
+                    <span id="loginStatus" class="text-sm font-bold text-gray-800"></span>
+                    <button
+                        id="formLogoutButton"
+                        class="px-4 py-2 bg-gray-500 text-white font-semibold rounded-lg hover:bg-gray-600 transition duration-150 ease-in-out shadow-md text-sm"
+                    >
+                        ログアウト
+                    </button>
+                </div>
+            </div>
+        </header>
+        
+        <section id="listSearchSection" class="mt-8">
+            <h2 class="text-2xl font-bold text-gray-700 mb-6 border-b pb-2">🗾 地域別 グルメリスト検索</h2>
+
+            <div class="flex space-x-4 mb-6 items-end p-4 bg-gray-100 rounded-lg shadow-inner">
+                <div>
+                    <label for="areaSelect" class="block text-sm font-medium text-gray-700 mb-1">地域を選択</label>
+                    <select id="areaSelect" class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500 transition duration-150 bg-white shadow-sm">
+                        <option value="">--- 地域を選択してください ---</option>
+                        <option value="東京">東京都 (Tokyo)</option>
+                        <option value="大阪">大阪府 (Osaka)</option>
+                        <option value="福岡">福岡県 (Fukuoka)</option>
+                    </select>
+                </div>
+                
+                <button
+                    id="searchListButton"
+                    class="px-5 py-2 bg-red-500 text-white font-semibold rounded-lg hover:bg-red-600 transition duration-150 ease-in-out shadow-md"
+                >
+                    検索
+                </button>
+                <button
+                    id="sortButton"
+                    class="px-5 py-2 bg-gray-500 text-white font-semibold rounded-lg hover:bg-gray-600 transition duration-150 ease-in-out shadow-md disabled:opacity-50"
+                    disabled
+                >
+                    ⭐️ 平点順 並び替え
+                </button>
+                
+                <button id="toggleViewButton" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition duration-200 shadow-md disabled:opacity-50" disabled>
+                    📜 リスト表示
+                </button>
+            </div>
+
+            <!-- 카드뉴스 위치 -->
+            <div id="cardContainer" class="mt-8">
+                <p id="initialMessage" class="text-center text-gray-500 py-10">データを読み込み中です... しばらくお待ちください。</p>
+            </div>
+
+            <!-- 페이지 네비게이션 -->
+            <div id="paginationContainer" class="mt-6 mb-12"></div>
+
+            <!-- 테이블 위치 -->
+            <div id="tableContainer" class="mt-8 hidden bg-white p-6 rounded-lg shadow-xl min-h-64">
+                </div>
+        </section>
+    </div>  
+
+    <script src="../js/list-logic.js"></script>
+</body>
+</html>
