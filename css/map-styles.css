@@ -1,0 +1,50 @@
+        /* 기본 글꼴 설정 */
+        body { font-family: 'Inter', sans-serif; } 
+        /* 지도가 전체 화면의 나머지 공간을 차지하도록 설정 */
+        #map {
+            width: 100%;
+            /* 헤더 높이만 고려하여 조정 */
+            height: calc(100vh - 80px); 
+            min-height: 500px;
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        /* 모달 입력 필드 포커스 스타일 (signUpModal 추가) */
+        #loginModal input:focus, #signUpModal input:focus {
+            outline: none;
+            border-color: #ef4444; /* red-500 */
+            box-shadow: 0 0 0 1px #ef4444; 
+        }
+        /* 모달이 숨겨져 있을 때 애니메이션 없이 바로 숨기기 */
+        .hidden { display: none !important; }
+        /* [새로 추가!] 이것이 '진짜' 닫기 버튼을 숨기는 코드입니다. */
+        
+        /* =========================================================
+           [최종본] 인포윈도우의 모든 여백 + 닫기 버튼 제거
+           =========================================================
+        */
+        
+        /* 1. 인포윈도우의 꼬리(pointer) 숨기기 */
+        .gm-style-iw-c::after { 
+            display: none !important; 
+        }
+
+        /* 2. (핵심) 'X' 버튼과 제목을 포함한 '상단 바' 전체를 숨기기
+              (이것이 gm-style-iw-ch의 부모이며, 상단 여백의 원인입니다) */
+        .gm-style-iw-chr {
+            display: none !important;
+        }
+        
+        /* 3. (핵심) 구글맵이 강제로 넣는 내부/외부의 모든 패딩 제거 */
+        .gm-style-iw-c,
+        .gm-style-iw-d,
+        .gm-style-iw-d > div:first-child { /* 이름 없는 래퍼 div */
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        /* 4. 메인 컨텐츠 영역이 스크롤을 방해하지 않도록 함
+              (스크롤은 우리 <div>가 하도록) */
+        .gm-style-iw-d {
+            overflow: hidden !important; 
+        }

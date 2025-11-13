@@ -1,0 +1,719 @@
+[
+  {
+    "shop_id": 1,
+    "user_id": "raidyday",
+    "review_score": 5,
+    "review_test": "待たずにすぐ注文できて、落ち着いた雰囲気の中でコーヒーを楽しめたのが良かったです。",
+    "update_date": "2025-07-10",
+    "Recommend": "ターレットラテアイス (Turret Latte Ice)"
+  },
+  {
+    "shop_id": 1,
+    "user_id": "kim hae",
+    "review_score": 4,
+    "review_test": "店内は写真撮影ができませんが、\nメニューは入るとすぐに見える黒板に書かれていて、どれにしようか選ぶのも楽しかったです。",
+    "update_date": "2025-04-15",
+    "Recommend": "アイスアメリカーノ (Iced Americano)"
+  },
+  {
+    "shop_id": 1,
+    "user_id": "suki",
+    "review_score": 4,
+    "review_test": "小さくて可愛い雰囲気のお店なのに、\nラテは力強い味わいで、そのギャップに驚きました。",
+    "update_date": "2025-01-25",
+    "Recommend": "海塩キャラメルラテ (Sea Salt Caramel Latte)"
+  },
+  {
+    "shop_id": 2,
+    "user_id": "jh.k",
+    "review_score": 3,
+    "review_test": "雰囲気は素敵だけど、長くは座っていられない感じ。",
+    "update_date": "2025-10-28",
+    "Recommend": "ソフトアイスクリームコーヒー"
+  },
+  {
+    "shop_id": 2,
+    "user_id": "Zoey",
+    "review_score": 4,
+    "review_test": "ここで飲んだコーヒーが一番心に残りました。",
+    "update_date": "2025-06-14",
+    "Recommend": "アンバター"
+  },
+  {
+    "shop_id": 2,
+    "user_id": "Boobidi",
+    "review_score": 5,
+    "review_test": "表参道で見つけた、ローストの香りが印象的なコーヒー店です。",
+    "update_date": "2024-09-02",
+    "Recommend": "アイスコーヒー"
+  },
+  {
+    "shop_id": 3,
+    "user_id": "nk",
+    "review_score": 5,
+    "review_test": "小さなカフェ好きには、本当におすすめの場所です。",
+    "update_date": "2025-03-17",
+    "Recommend": "ホット・ドッグ"
+  },
+  {
+    "shop_id": 3,
+    "user_id": "Chul",
+    "review_score": 5,
+    "review_test": "代々木公園に行くたび立ち寄りたくなる、小さなカフェ。",
+    "update_date": "2025-02-11",
+    "Recommend": "ドリップコーヒー"
+  },
+  {
+    "shop_id": 3,
+    "user_id": "zerogray",
+    "review_score": 3,
+    "review_test": "カフェより、代々木公園の散歩のほうが良かったです。",
+    "update_date": "2024-12-23",
+    "Recommend": "アイスコーヒー"
+  },
+  {
+    "shop_id": 4,
+    "user_id": "Fakr",
+    "review_score": 4,
+    "review_test": "盛りつけが綺麗でテンション上がる。",
+    "update_date": "2025-03-02"
+  },
+  {
+    "shop_id": 4,
+    "user_id": "Ral",
+    "review_score": 3,
+    "review_test": "小さなお店だけど、心までほかほかになる味でした。",
+    "update_date": "2024-12-20"
+  },
+  {
+    "shop_id": 4,
+    "user_id": "tt",
+    "review_score": 5,
+    "review_test": "お腹が「しあわせ～」って言ってる。",
+    "update_date": "2024-07-20"
+  },
+  {
+    "shop_id": 5,
+    "user_id": "CH.c",
+    "review_score": 4,
+    "review_test": "店員さんたちは親切で、海鮮丼も美味しかったです。",
+    "update_date": "2025-11-01",
+    "Recommend": "松"
+  },
+  {
+    "shop_id": 5,
+    "user_id": "yelin",
+    "review_score": 5,
+    "review_test": "またぜひ伺いたいお店です！",
+    "update_date": "2025-05-05",
+    "Recommend": "竹"
+  },
+  {
+    "shop_id": 5,
+    "user_id": "moz",
+    "review_score": 4,
+    "review_test": "最後にお出汁をかけていただくスタイルが印象的でした。",
+    "update_date": "2024-11-02",
+    "Recommend": "梅"
+  },
+  {
+    "shop_id": 6,
+    "user_id": "mz",
+    "review_score": 4,
+    "review_test": "お野菜たっぷり!\nヘルシーでボリュームいっぱい!",
+    "update_date": "2025-11-10",
+    "Recommend": "ファーム·コース"
+  },
+  {
+    "shop_id": 6,
+    "user_id": "jung.k",
+    "review_score": 5,
+    "review_test": "野菜好きな方！野菜不足を感じている方！健康を意識されている方にもおすすめ",
+    "update_date": "2025-06-07",
+    "Recommend": "野菜プレート"
+  },
+  {
+    "shop_id": 6,
+    "user_id": "illi",
+    "review_score": 3,
+    "review_test": "味が濃すぎました><",
+    "update_date": "2025-01-03",
+    "Recommend": "ニンジンスムージー"
+  },
+  {
+    "shop_id": 7,
+    "user_id": "K",
+    "review_score": 5,
+    "review_test": "店員さんが優しくて居心地がいい。",
+    "update_date": "2025-08-07",
+    "Recommend": "レアステーキ"
+  },
+  {
+    "shop_id": 7,
+    "user_id": "Aa aa",
+    "review_score": 5,
+    "review_test": "量もちょうどよくて、気持ちまで満足。",
+    "update_date": "2025-04-09",
+    "Recommend": "和牛おにぎり"
+  },
+  {
+    "shop_id": 7,
+    "user_id": "Rk",
+    "review_score": 4,
+    "review_test": "ひとりでふらっと入っても、安心できる場所。",
+    "update_date": "2024-01-05",
+    "Recommend": "レアステーキ"
+  },
+  {
+    "shop_id": 8,
+    "user_id": "ay",
+    "review_score": 3,
+    "review_test": "味は良いけど、提供に少し時間がかかる。",
+    "update_date": "2025-11-01",
+    "Recommend": "並盛"
+  },
+  {
+    "shop_id": 8,
+    "user_id": "myo",
+    "review_score": 4,
+    "review_test": "味は悪くないけど、ちょっと値段が高め。",
+    "update_date": "2025-10-09",
+    "Recommend": "並盛"
+  },
+  {
+    "shop_id": 8,
+    "user_id": "kuuu",
+    "review_score": 5,
+    "review_test": "思ったより量が多くて満足感あり。",
+    "update_date": "2025-06-23",
+    "Recommend": "大盛"
+  },
+  {
+    "shop_id": 9,
+    "user_id": "bzu",
+    "review_score": 5,
+    "review_test": "初めて来たけど、リピート確定。",
+    "update_date": "2025-05-05",
+    "Recommend": "さつま芋と生ハムのサラダ"
+  },
+  {
+    "shop_id": 9,
+    "user_id": "kang",
+    "review_score": 4,
+    "review_test": "店員さんが優しくて居心地がいい。",
+    "update_date": "2025-07-05",
+    "Recommend": "焼きさつま芋のサラダ ごぼうドレッシング"
+  },
+  {
+    "shop_id": 9,
+    "user_id": "LOo",
+    "review_score": 5,
+    "review_test": "素材の味がしっかりしてて、また来たくなる。",
+    "update_date": "2025-03-22",
+    "Recommend": "焼きかつお 香味たれかけ"
+  },
+  {
+    "shop_id": 10,
+    "user_id": "Fakr",
+    "review_score": 4,
+    "review_test": "お皿の上がもうかわいい、食べるのもったいない。",
+    "update_date": "2025-07-09",
+    "Recommend": "ひき肉とコメ定食"
+  },
+  {
+    "shop_id": 10,
+    "user_id": "Ral",
+    "review_score": 5,
+    "review_test": "お腹も気持ちも満たされました、ありがとう〜。",
+    "update_date": "2025-06-01",
+    "Recommend": "ひき肉とコメ定食"
+  },
+  {
+    "shop_id": 10,
+    "user_id": "tt",
+    "review_score": 5,
+    "review_test": "思ったより量が多くて満足感あり。",
+    "update_date": "2025-02-18",
+    "Recommend": "ひき肉とコメ定食"
+  },
+  {
+    "shop_id": 11,
+    "user_id": "Zoey",
+    "review_score": 5,
+    "review_test": "シンプルだけどちゃんと美味しい。こういうのが一番好き。",
+    "update_date": "2025-10-29",
+    "Recommend": "特上海鮮丼"
+  },
+  {
+    "shop_id": 11,
+    "user_id": "Aa aa",
+    "review_score": 3,
+    "review_test": "普通に美味しかったです。可もなく不可もなく。",
+    "update_date": "2025-09-11",
+    "Recommend": "天ぷら"
+  },
+  {
+    "shop_id": 11,
+    "user_id": "ay",
+    "review_score": 5,
+    "review_test": "落ち着く空間でゆっくりできました。また友達と行きます。",
+    "update_date": "2025-06-14",
+    "Recommend": "生ビール"
+  },
+  {
+    "shop_id": 12,
+    "user_id": "CH.c",
+    "review_score": 4,
+    "review_test": "量もちょうどよく、味のバランスも良かったです。満足。",
+    "update_date": "2025-09-27",
+    "Recommend": "もつ鍋"
+  },
+  {
+    "shop_id": 12,
+    "user_id": "cho",
+    "review_score": 5,
+    "review_test": "店員さんがとても親切で、心がほっとしました。",
+    "update_date": "2025-03-08",
+    "Recommend": "ハイボール"
+  },
+  {
+    "shop_id": 12,
+    "user_id": "yan",
+    "review_score": 3,
+    "review_test": "期待よりは少し控えめ。でも嫌いじゃない",
+    "update_date": "2025-01-10",
+    "Recommend": "もつ鍋"
+  },
+  {
+    "shop_id": 13,
+    "user_id": "ruru",
+    "review_score": 3,
+    "review_test": "値段相応って感じ。もう少し特徴があると嬉しい。",
+    "update_date": "2025-10-29",
+    "Recommend": "明太子丼"
+  },
+  {
+    "shop_id": 13,
+    "user_id": "uaaaaa",
+    "review_score": 5,
+    "review_test": "味は悪くないけど、ちょっと値段が高め。",
+    "update_date": "2025-07-25",
+    "Recommend": "生ビール"
+  },
+  {
+    "shop_id": 13,
+    "user_id": "liilll",
+    "review_score": 4,
+    "review_test": "小さなお店だけど、心までほかほかになる味でした。",
+    "update_date": "2025-05-12",
+    "Recommend": "海鮮丼"
+  },
+  {
+    "shop_id": 14,
+    "user_id": "kim jin",
+    "review_score": 5,
+    "review_test": "丁寧に作られているのが伝わる味。ほっとする。",
+    "update_date": "2025-07-25",
+    "Recommend": "もつ鍋"
+  },
+  {
+    "shop_id": 14,
+    "user_id": "JINA",
+    "review_score": 4,
+    "review_test": "どのメニューも外れがなくて安心して頼めました。",
+    "update_date": "2025-04-28",
+    "Recommend": "ハイボール"
+  },
+  {
+    "shop_id": 14,
+    "user_id": "Bbb",
+    "review_score": 5,
+    "review_test": "ちょっとした気遣いが嬉しかったです。細やかなサービス",
+    "update_date": "2025-01-10",
+    "Recommend": "もつ鍋"
+  },
+  {
+    "shop_id": 15,
+    "user_id": "Dtttd",
+    "review_score": 3,
+    "review_test": "少し待ち時間が長かったかな。でも許容範囲。",
+    "update_date": "2025-05-05",
+    "Recommend": "一蘭ラーメン"
+  },
+  {
+    "shop_id": 15,
+    "user_id": "Ral",
+    "review_score": 4,
+    "review_test": "雰囲気は良いけど、席が少し狭く感じました。",
+    "update_date": "2025-04-02",
+    "Recommend": "一蘭ラーメン"
+  },
+  {
+    "shop_id": 15,
+    "user_id": "RURU",
+    "review_score": 5,
+    "review_test": "シンプルだけどちゃんと美味しい",
+    "update_date": "2025-02-20",
+    "Recommend": "抹茶ビール"
+  },
+  {
+    "shop_id": 16,
+    "user_id": "LEE",
+    "review_score": 5,
+    "review_test": "また友達と行きます。",
+    "update_date": "2025-09-30",
+    "Recommend": "アイスコーヒー"
+  },
+  {
+    "shop_id": 16,
+    "user_id": "URI",
+    "review_score": 4,
+    "review_test": "こういうのが一番好き。",
+    "update_date": "2025-08-22",
+    "Recommend": "ドリップコーヒー"
+  },
+  {
+    "shop_id": 16,
+    "user_id": "BOO",
+    "review_score": 4,
+    "review_test": "お店の人の笑顔に癒されました。いい日になった。",
+    "update_date": "2025-06-14",
+    "Recommend": "アイスコーヒー"
+  },
+  {
+    "shop_id": 17,
+    "user_id": "JINA",
+    "review_score": 5,
+    "review_test": "やさしい味に包まれた日。ここに来てよかったって思った。",
+    "update_date": "2025-05-12",
+    "Recommend": "カフェラテ"
+  },
+  {
+    "shop_id": 17,
+    "user_id": "jinu",
+    "review_score": 3,
+    "review_test": "悪くないけど、私の心にまでは届かなかったみたい。",
+    "update_date": "2025-04-28",
+    "Recommend": "アイスコーヒー"
+  },
+  {
+    "shop_id": 17,
+    "user_id": "tamtam",
+    "review_score": 5,
+    "review_test": "思ってたより静かじゃなくて、ちょっとだけ余白がほしかった。",
+    "update_date": "2025-03-14",
+    "Recommend": "ドリップコーヒー"
+  },
+  {
+    "shop_id": 18,
+    "user_id": "TT",
+    "review_score": 5,
+    "review_test": "今日の自分をちょっと褒めたくなる味だった",
+    "update_date": "2025-10-04",
+    "Recommend": "ドリップコーヒー"
+  },
+  {
+    "shop_id": 18,
+    "user_id": "opp",
+    "review_score": 4,
+    "review_test": "ちょっとした気遣いが嬉しかったです。細やかなサービス",
+    "update_date": "2025-06-14",
+    "Recommend": "カフェラテ"
+  },
+  {
+    "shop_id": 18,
+    "user_id": "rupi",
+    "review_score": 4,
+    "review_test": "どのメニューも外れがなくて安心して頼めました。",
+    "update_date": "2025-01-27",
+    "Recommend": "カフェラテ"
+  },
+  {
+    "shop_id": 19,
+    "user_id": "kang",
+    "review_score": 5,
+    "review_test": "また友達と行きます。",
+    "update_date": "2025-07-19",
+    "Recommend": "牛カツ"
+  },
+  {
+    "shop_id": 19,
+    "user_id": "Choi",
+    "review_score": 3,
+    "review_test": "少し待ち時間が長かったかな。でも許容範囲。",
+    "update_date": "2025-07-03",
+    "Recommend": "生ビール"
+  },
+  {
+    "shop_id": 19,
+    "user_id": "HWang",
+    "review_score": 4,
+    "review_test": "普通に美味しかったです。可もなく不可もなく。",
+    "update_date": "2025-05-30",
+    "Recommend": "生ビール"
+  },
+  {
+    "shop_id": 20,
+    "user_id": "tem",
+    "review_score": 5,
+    "review_test": "店員さんがとても親切",
+    "update_date": "2025-05-30",
+    "Recommend": "お刺身階段盛り合わせ"
+  },
+  {
+    "shop_id": 20,
+    "user_id": "cCc",
+    "review_score": 5,
+    "review_test": "期待よりは少し控えめ。",
+    "update_date": "2025-03-14",
+    "Recommend": "ボーンブロス出し巻き卵"
+  },
+  {
+    "shop_id": 20,
+    "user_id": "imtired",
+    "review_score": 3,
+    "review_test": "値段相応って感じ",
+    "update_date": "2025-02-20",
+    "Recommend": "−196度冷やしトマト"
+  },
+  {
+    "shop_id": 21,
+    "user_id": "CH.c",
+    "review_score": 5,
+    "review_test": "落ち着いた雰囲気で、ゆっくりできました。",
+    "update_date": "2025-07-19",
+    "Recommend": "うな丼"
+  },
+  {
+    "shop_id": 21,
+    "user_id": "cho",
+    "review_score": 5,
+    "review_test": "店員さんが優しくて、気持ちよく過ごせた。",
+    "update_date": "2025-07-03",
+    "Recommend": "生ビール"
+  },
+  {
+    "shop_id": 21,
+    "user_id": "yan",
+    "review_score": 4,
+    "review_test": "悪くはないけど、特に印象には残らなかったかな。",
+    "update_date": "2025-05-30",
+    "Recommend": "うな丼"
+  },
+  {
+    "shop_id": 22,
+    "user_id": "myo",
+    "review_score": 4,
+    "review_test": "シンプルだけど丁寧な味。好き。",
+    "update_date": "2025-08-07",
+    "Recommend": "一日定食"
+  },
+  {
+    "shop_id": 22,
+    "user_id": "kuuu",
+    "review_score": 5,
+    "review_test": "また来たいって自然に思えるお店。",
+    "update_date": "2025-04-09",
+    "Recommend": "回復定食"
+  },
+  {
+    "shop_id": 22,
+    "user_id": "bzu",
+    "review_score": 4,
+    "review_test": "人が多くてちょっと落ち着けなかった。",
+    "update_date": "2024-01-05",
+    "Recommend": "満点定食"
+  },
+  {
+    "shop_id": 23,
+    "user_id": "kim jin",
+    "review_score": 5,
+    "review_test": "席の配置がちょうどよくて居心地が良かったです",
+    "update_date": "2025-11-01",
+    "Recommend": "お好み焼きセット"
+  },
+  {
+    "shop_id": 23,
+    "user_id": "JINA",
+    "review_score": 4,
+    "review_test": "一口目で「あ、好き」ってなった味。",
+    "update_date": "2025-05-05",
+    "Recommend": "お好み焼き"
+  },
+  {
+    "shop_id": 23,
+    "user_id": "Bbb",
+    "review_score": 4,
+    "review_test": "思ってたよりメニューの個性は控えめ。",
+    "update_date": "2024-11-02",
+    "Recommend": "生ビール"
+  },
+  {
+    "shop_id": 24,
+    "user_id": "jinu",
+    "review_score": 5,
+    "review_test": "香りからおいしいって分かるやつ。",
+    "update_date": "2025-03-17",
+    "Recommend": "牛タン定食"
+  },
+  {
+    "shop_id": 24,
+    "user_id": "tamtam",
+    "review_score": 5,
+    "review_test": "また友達と行きます。",
+    "update_date": "2025-02-11",
+    "Recommend": "牛タン定食"
+  },
+  {
+    "shop_id": 24,
+    "user_id": "TT",
+    "review_score": 5,
+    "review_test": "ちょっと時間がかかったのが気になった。",
+    "update_date": "2024-12-23",
+    "Recommend": "牛タン定食"
+  },
+  {
+    "shop_id": 25,
+    "user_id": "namuel",
+    "review_score": 5,
+    "review_test": "どのメニューも外れがなくて安心して頼めました。",
+    "update_date": "2025-06-23",
+    "Recommend": "茶碗蒸し"
+  },
+  {
+    "shop_id": 25,
+    "user_id": "skt",
+    "review_score": 4,
+    "review_test": "少し待ち時間が長かったかな。でも許容範囲。",
+    "update_date": "2025-05-05",
+    "Recommend": "生エビ"
+  },
+  {
+    "shop_id": 25,
+    "user_id": "guoo",
+    "review_score": 3,
+    "review_test": "丁寧に作られているのが伝わる味。ほっとする。",
+    "update_date": "2025-07-05",
+    "Recommend": "生ビール"
+  },
+  {
+    "shop_id": 26,
+    "user_id": "pp",
+    "review_score": 5,
+    "review_test": "ふと立ち寄ったけど、良い時間になった。",
+    "update_date": "2025-07-19",
+    "Recommend": "握りセット"
+  },
+  {
+    "shop_id": 26,
+    "user_id": "oOoo",
+    "review_score": 4,
+    "review_test": "落ち着いた雰囲気で、ゆっくりできました。",
+    "update_date": "2025-07-03",
+    "Recommend": "生ビール"
+  },
+  {
+    "shop_id": 26,
+    "user_id": "cCc",
+    "review_score": 4,
+    "review_test": "店員さんがとても親切",
+    "update_date": "2025-05-30",
+    "Recommend": "寿司セット"
+  },
+  {
+    "shop_id": 27,
+    "user_id": "imtired",
+    "review_score": 5,
+    "review_test": "席の配置がちょうどよくて居心地が良かったです",
+    "update_date": "2025-07-19",
+    "Recommend": "カフェラテ"
+  },
+  {
+    "shop_id": 27,
+    "user_id": "CH.c",
+    "review_score": 3,
+    "review_test": "雰囲気は良いけど、席が少し狭く感じました。",
+    "update_date": "2025-07-03",
+    "Recommend": "アイスコーヒー"
+  },
+  {
+    "shop_id": 27,
+    "user_id": "jh.k",
+    "review_score": 5,
+    "review_test": "店員さんがとても親切で、心がほっとしました。",
+    "update_date": "2025-05-30",
+    "Recommend": "ドリップコーヒー"
+  },
+  {
+    "shop_id": 28,
+    "user_id": "Zoey",
+    "review_score": 4,
+    "review_test": "席の配置がちょうどよくて居心地が良かったです",
+    "update_date": "2025-10-09",
+    "Recommend": "カフェラテ"
+  },
+  {
+    "shop_id": 28,
+    "user_id": "Boobidi",
+    "review_score": 5,
+    "review_test": "ふと立ち寄ったけど、良い時間になった。",
+    "update_date": "2025-06-23",
+    "Recommend": "アイスコーヒー"
+  },
+  {
+    "shop_id": 28,
+    "user_id": "HWang",
+    "review_score": 5,
+    "review_test": "本当におすすめの場所です。",
+    "update_date": "2025-05-05",
+    "Recommend": "ドリップコーヒー"
+  },
+  {
+    "shop_id": 29,
+    "user_id": "tem",
+    "review_score": 4,
+    "review_test": "やさしい味に包まれた日。ここに来てよかったって思った。",
+    "update_date": "2025-10-09",
+    "Recommend": "カフェラテ"
+  },
+  {
+    "shop_id": 29,
+    "user_id": "cCc",
+    "review_score": 5,
+    "review_test": "シンプルだけどちゃんと美味しい",
+    "update_date": "2025-06-23",
+    "Recommend": "アイスコーヒー"
+  },
+  {
+    "shop_id": 29,
+    "user_id": "Ral",
+    "review_score": 5,
+    "review_test": "やさしい味に包まれた日。ここに来てよかったって思った。",
+    "update_date": "2025-05-05",
+    "Recommend": "ドリップコーヒー"
+  },
+  {
+    "shop_id": 30,
+    "user_id": "tt",
+    "review_score": 5,
+    "review_test": "期待よりは少し控えめ。でも嫌いじゃない",
+    "update_date": "2025-10-29",
+    "Recommend": "生ビール"
+  },
+  {
+    "shop_id": 30,
+    "user_id": "Zoey",
+    "review_score": 4,
+    "review_test": "期待よりは少し控えめ。",
+    "update_date": "2025-09-11",
+    "Recommend": "寿司セット"
+  },
+  {
+    "shop_id": 30,
+    "user_id": "rool",
+    "review_score": 5,
+    "review_test": "また来たいって自然に思えるお店。",
+    "update_date": "2025-06-14",
+    "Recommend": "茶碗蒸し"
+  }
+]
