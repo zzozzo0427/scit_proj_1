@@ -4,8 +4,8 @@
 let currentInfoWindow = null;
 
 let map;
-let isLoggedIn = false; 
-let allMarkers = [];      
+let isLoggedIn = false;
+let allMarkers = [];
 
 // UI 요소 참조 (원본과 동일)
 let loginForm;
@@ -46,13 +46,13 @@ async function fetchAllData() {
 
         const shops = await shopResponse.json();
         const reviews = await reviewResponse.json();
-        
+
         console.log('Shops and Reviews loaded successfully.');
         return { shops, reviews };
 
     } catch (error) {
         console.error('Failed to fetch data.', error);
-        return { shops: [], reviews: [] }; 
+        return { shops: [], reviews: [] };
     }
 }
 
@@ -83,12 +83,12 @@ window.initMap = async () => {
         // --- [수정됨] JSON 데이터 비동기 로드 ---
         const { shops, reviews } = await fetchAllData();
         // --- JSON 데이터 로드 끝 ---
-        
+
         // 지도 초기 위치 (원본과 동일)
         const initialPosition = { lat: 35.0, lng: 134.0 };
         const mapOptions = {
             center: initialPosition,
-            zoom: 7, 
+            zoom: 7,
             minZoom: 2,
         };
 
@@ -107,15 +107,15 @@ window.initMap = async () => {
 
         // 2. 초기 로그인 상태 UI/마커 업데이트 (원본과 동일)
         updateAuthUI();
-        updateMapVisibility(); 
-        
+        updateMapVisibility();
+
         // 3. 이벤트 리스너 설정 (원본과 동일)
         showLoginModalButton.addEventListener('click', openLoginModal);
         modalCloseButton.addEventListener('click', closeLoginModal);
         openSignUpLink.addEventListener('click', handleOpenSignUpFromLogin);
         signUpModalCloseButton.addEventListener('click', closeSignUpModal);
         document.getElementById('signUpButton').addEventListener('click', handleSignUp);
-        
+
         loginModal.addEventListener('click', (e) => {
             if (e.target === loginModal) closeLoginModal();
         });
@@ -174,10 +174,10 @@ function processShopData(shops, reviews) {
                 // 위도/경도 데이터가 유효하지 않은 경우
                 throw new Error('Missing or invalid coordinate data.');
             }
-            
+
             // 3. (location이 성공적으로 생성된 경우) 리뷰 찾기
             const shopReviews = reviewsByShopId[shop.shop_id] || [];
-            
+
             // 4. 마커 추가
             addGourmetMarker(shop, location, shopReviews);
 
@@ -190,46 +190,40 @@ function processShopData(shops, reviews) {
 }
 
 /**
- * [수정된 함수] - 반쪽 별을 포함한 정확한 별점 표시
- * @param {number} score - 평점 (예: 3.5)
- * @returns {string} - 별점 HTML
+ * [수정된 함수] - 반올림 방식의 '붉은색' 별점
+ * 숫자 평점을 '반올림'하여 간단한 별(★/☆) HTML로 변환합니다.
+ * @param {number} score - 평점 (예: 4.6)
+ * @returns {string} - 예: "★★★★☆"
  */
 function getStarRatingHtml(score) {
+    // 1. 숫자가 아니거나 null이면 빈 문자열 반환
     if (isNaN(score) || score === null) {
-        return '<span style="color: #e0e0e0;">평가 없음</span>';
+        return '<span style="color: #e0e0e0; font-size: 13px;">평가 없음</span>';
     }
 
-    const fullStars = Math.floor(score);
-    const hasHalfStar = (score % 1) >= 0.25 && (score % 1) < 0.75;
-    const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+    // 2. 점수를 가장 가까운 정수(full number)로 반올림 (예: 4.6 -> 5, 4.2 -> 4)
+    const roundedScore = Math.round(score);
 
     let starsHtml = '';
-    
-    // 꽉 찬 별
-    for (let i = 0; i < fullStars; i++) {
-        starsHtml += '<span style="color: #f59e0b;">★</span>';
+    const maxStars = 5;
+
+    // 3. 5번 반복
+    for (let i = 1; i <= maxStars; i++) {
+        if (i <= roundedScore) {
+            starsHtml += '★'; // 꽉 찬 별
+        } else {
+            starsHtml += '☆'; // 빈 별
+        }
     }
-    
-    // 반쪽 별
-    if (hasHalfStar) {
-        starsHtml += `
-            <span style="position: relative; display: inline-block; color: #e0e0e0;">
-                ★
-                <span style="position: absolute; left: 0; top: 0; width: 50%; overflow: hidden; color: #f59e0b;">★</span>
-            </span>
-        `;
-    }
-    
-    // 빈 별
-    for (let i = 0; i < emptyStars; i++) {
-        starsHtml += '<span style="color: #e0e0e0;">★</span>';
-    }
-    
-    return `<span style="font-size: 1.1rem; line-height: 1; white-space: nowrap;">${starsHtml}</span>`;
+
+    // 4. 붉은색/회색 스타일을 입혀 반환 (레퍼런스 참고)
+    return `
+        <span style="color: #ef4444; font-size: 1.1rem; line-height: 1; white-space: nowrap;">${starsHtml}</span>
+    `;
 }
 
 /**
- * [최종 수정] - 폰트/레이아웃 조정 (가로 확장, 세로 축소)
+ * [최종 수정] - 2단 레이아웃 복귀
  * @param {Object} shop - shops.json의 개별 가게 데이터
  * @param {google.maps.LatLng} location - 위도/경도 객체
  * @param {Array<Object>} reviews - 해당 shop의 리뷰 목록
@@ -252,17 +246,16 @@ function addGourmetMarker(shop, location, reviews) {
     const backBtnId = `btn_back_${uniqueId}`;
 
     // --- 1. 리뷰 페이지 HTML ---
-    let reviewsHtml = `<p style="font-size: 14px; color: #6b7280; margin: 0;">등록된 리뷰가 없습니다.</p>`;
+    let reviewsHtml = `<p style="font-size: 14px; color: #6b7280; margin: 0;">登録されたレビューがありません。</p>`;
     if (reviews.length > 0) {
         reviewsHtml = reviews.map(r => {
-            const recommendHtml = r.Recommend 
+            const recommendHtml = r.Recommend
                 ? `<p style="font-size: 13px; color: #c45d00; background: #fffbeb; padding: 4px 8px; border-radius: 4px; margin-top: 6px; margin-bottom: 0;">
-                       <strong>추천:</strong> ${r.Recommend}
-                   </p>`
+                       <strong>おすすめ:</strong> ${r.Recommend}
+                  </p>` // [수정] '추천' -> 'おすすめ'
                 : '';
             const scoreText = r.review_score ? `${r.review_score.toFixed(1)}` : 'N/A';
             const comment = r.review_test.replace(/\n/g, '<br>');
-
             return `
             <div style="border-top: 1px solid #e5e7eb; padding-top: 10px; margin-top: 10px;">
                 <p style="font-weight: 600; color: #1f2937; margin: 0; display: flex; justify-content: space-between; align-items: center;">
@@ -270,8 +263,8 @@ function addGourmetMarker(shop, location, reviews) {
                     <span style="font-weight: 400; color: #6b7280; font-size: 13px;">${r.update_date}</span>
                 </p>
                 <p style="margin: 3px 0; font-size: 14px; color: #4b5563;">
-                    (평점: ${scoreText} / 5)
-                </p>
+                    (評価: ${scoreText} / 5)
+                </p> 
                 <p style="font-size: 14px; color: #4b5563; margin-top: 5px; margin-bottom: 0; line-height: 1.5;">
                     ${comment}
                 </p>
@@ -281,15 +274,22 @@ function addGourmetMarker(shop, location, reviews) {
         }).join('');
     }
     
-    // [수정됨] 가로폭 550px, 세로 220px
+    // [수정됨] 가로폭을 450px로 늘림
     const reviewPageHtml = `
-        <div id="${reviewPageId}" style="display: none; padding: 10px 15px; width: 480px; max-height: 220px; overflow-y: auto; font-family: 'Inter', sans-serif; line-height: 1.4;">
-            <button id="${backBtnId}" style="background: #f3f4f6; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 14px; font-weight: 600; color: #374151; margin-bottom: 10px;">
-                &lt; ◀ 돌아가기
-            </button>
-            <h3 style="font-weight: 700; font-size: 1.1rem; color: #1f2937; margin: 0 0 5px 0;">
-                ${shop.name} - 리뷰 (${reviews.length}개)
-            </h3>
+        <div id="${reviewPageId}" style="display: none; padding: 10px 15px; width: 450px; max-height: 280px; overflow-y: auto; font-family: 'Inter', sans-serif; line-height: 1.4;">
+            
+            <div style="display: flex; align-items: center; justify-content: flex-start; margin-bottom: 10px;">
+                
+                <button id="${backBtnId}" style="background: #f3f4f6; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 14px; font-weight: 600; color: #374151; line-height: 1; margin-right: 10px;">
+                    ◀
+                </button>
+
+                <h3 style="font-weight: 700; font-size: 1.0rem; color: #1f2937; margin: 0;">
+                    ${shop.name} - レビュー
+                    <span style="font-size: 0.85rem; font-weight: 500; color: #6b7280; margin-left: 4px;">(${reviews.length}件)</span>
+                </h3>
+            </div>
+
             ${reviewsHtml}
         </div>
     `;
@@ -299,39 +299,45 @@ function addGourmetMarker(shop, location, reviews) {
     const addressHtml = shop.address.replace(/\n/g, '<br>');
     const timeHtml = shop.time.replace(/\n/g, '<br>');
     const shopScoreText = shop.review ? `${shop.review.toFixed(1)}` : 'N/A';
+    const shopScoreStarsHtml = getStarRatingHtml(shop.review); // 붉은색 별점
 
-    // [수정됨] 가로폭 520px, 세로 220px
+    // [최종 수정됨] 2단 레이아웃 [왼쪽: 모든 텍스트 | 오른쪽: 사진]
     const infoPageHtml = `
-        <div id="${infoPageId}" style="display: flex; padding: 15px; width: 480px; max-height: 220px; overflow-y: auto; font-family: 'Inter', sans-serif; line-height: 1.4;">
+        <div id="${infoPageId}" style="display: flex; padding: 15px; width: 450px; font-family: 'Inter', sans-serif; line-height: 1.4;">
             
             <div style="flex: 1; min-width: 0; padding-right: 15px;">
-                <h2 style="font-size: 1.2rem; font-weight: 700; color: #dc2626; margin: 0 0 8px 0;">
+                
+                <h2 style="font-size: 1.3rem; font-weight: 700; color: #333; margin: 0 0 4px 0;">
                     ${shop.name}
                 </h2>
                 
-                <div style="font-size: 14px; color: #374151; margin-bottom: 12px; display: flex; align-items: center; flex-wrap: wrap; gap: 5px 10px;">
-                    <span style="font-weight: 600; font-size: 12px;">평점: ${shopScoreText} / 5</span>
-                    <button id="${viewBtnId}" style="background: none; border: none; color: #ef4444; font-weight: 600; cursor: pointer; padding: 0; font-size: 11px; text-decoration: underline; margin-left: 5px;">
-                        리뷰 보기 (${reviews.length}개)
+                <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 12px; flex-wrap: wrap;">
+                    <span style="font-size: 1.1rem; font-weight: 700; color: #ef4444;">${shopScoreText}</span>
+                    ${shopScoreStarsHtml}
+                    <span style="color: #888; font-size: 12px; margin-left: 2px;">|</span>
+                    <button id="${viewBtnId}" style="background: none; border: none; color: #007bff; font-size: 12px; text-decoration: underline; cursor: pointer; padding: 0; margin-left: 2px;">
+                        レビュー ${reviews.length}件
                     </button>
                 </div>
 
-                <div style="font-size: 11px; color: #374151; margin-bottom: 8px; line-height: 1.5;">
-                    <p style="margin: 4px 0;"><strong>카테고리:</strong> ${shop.category}</p>
-                    <p style="margin: 4px 0;"><strong>가격대:</strong> ${shop.price}</p>
-                    <p style="margin: 4px 0;"><strong>주소:</strong> ${addressHtml}</p>
-                    <p style="margin: 4px 0;"><strong>영업시간:</strong> ${timeHtml}</p>
-                    <p style="margin: 4px 0;"><strong>전화:</strong> ${shop.phone}</p>
+                <div style="font-size: 11px; color: #333; line-height: 1.6;">
+                    <p style="margin: 4px 0;"><strong>住所:</strong> ${addressHtml}</p>
+                    <p style="margin: 4px 0;"><strong>電話:</strong> <span style="color: #007749; font-weight: 600;">${shop.phone}</span></p>
+                    <p style="margin: 4px 0;"><strong>カテゴリー:</strong> ${shop.category}</p>
+                    <p style="margin: 4px 0;"><strong>価格帯:</strong> ${shop.price}</p>
+                    <p style="margin: 4px 0;"><strong>営業時間:</strong> ${timeHtml}</p>
                 </div>
+
             </div>
 
-            <div style="width: 200px; flex-shrink: 0;">
+            <div style="width: 180px; flex-shrink: 0;">
                 <img src="${imagePath}" 
                      alt="${shop.name}" 
-                     style="width: 100%; height: 200px; /* 세로 높이 늘림 */ object-fit: cover; border-radius: 6px;"
+                     style="width: 100%; height: 160px; object-fit: cover; border-radius: 6px;"
                      onerror="this.style.display='none';"
                 >
             </div>
+
         </div>
     `;
 
@@ -348,15 +354,17 @@ function addGourmetMarker(shop, location, reviews) {
         const viewBtn = document.getElementById(viewBtnId);
         if (viewBtn) {
             viewBtn.addEventListener('click', () => {
-                document.getElementById(infoPageId).style.display = 'none';
+                document.getElementById(infoPageId).style.display = 'block'; // 'flex' -> 'block'
                 document.getElementById(reviewPageId).style.display = 'block';
+                // [수정] 'block'으로 변경
+                document.getElementById(infoPageId).style.display = 'none';
             });
         }
         
         const backBtn = document.getElementById(backBtnId);
         if (backBtn) {
             backBtn.addEventListener('click', () => {
-                document.getElementById(infoPageId).style.display = 'flex'; 
+                document.getElementById(infoPageId).style.display = 'flex'; // ★★★ 여기를 'flex'로 복원
                 document.getElementById(reviewPageId).style.display = 'none';
             });
         }
@@ -383,7 +391,6 @@ function addGourmetMarker(shop, location, reviews) {
     
     allMarkers.push(marker);
 }
-
 
 // =========================================================
 // 모달 제어 함수 (원본과 동일)
@@ -428,7 +435,7 @@ function validateForm(username, password, email) {
         alert("ユーザー名は4～16文字の半角英数字を使用してください。");
         return false;
     }
-    const passwordRegex = /^.{8,20}$/; 
+    const passwordRegex = /^.{8,20}$/;
     if (!passwordRegex.test(password)) {
         alert("パスワードは8文字以上、20文字以下で入力してください。");
         return false;
@@ -447,22 +454,22 @@ function handleSignUp() {
     const email = document.getElementById('signUpEmail').value;
 
     if (!validateForm(username, password, email)) {
-        return; 
+        return;
     }
     const existingUser = localStorage.getItem('user_' + username);
     if (existingUser) {
         alert("既に存在するユーザー名です。");
         return;
     }
-    const userData = { 
+    const userData = {
         username: username,
-        password: password, 
+        password: password,
         email: email
     };
     localStorage.setItem('user_' + username, JSON.stringify(userData));
     alert(`🎉 ${username}様、新規登録が完了しました！`);
     closeSignUpModal();
-    localStorage.setItem('currentUser', username); 
+    localStorage.setItem('currentUser', username);
     isLoggedIn = true;
     updateAuthUI();
     updateMapVisibility();
@@ -485,7 +492,7 @@ function handleLogin() {
         alert("パスワードが一致しません。");
         return;
     }
-    isLoggedIn = true; 
+    isLoggedIn = true;
     localStorage.setItem('currentUser', username);
     closeLoginModal();
     updateAuthUI();
@@ -502,9 +509,9 @@ function handleLogout() {
 function updateAuthUI() {
     const currentUsername = localStorage.getItem('currentUser');
     const infoText = document.getElementById('mapInfoText');
-    
+
     if (currentUsername) {
-        isLoggedIn = true; 
+        isLoggedIn = true;
     } else {
         isLoggedIn = false;
     }
@@ -512,14 +519,14 @@ function updateAuthUI() {
     if (isLoggedIn && currentUsername) {
         loginForm.style.display = 'none';
         logoutInfo.style.display = 'flex';
-        document.getElementById('loginStatus').textContent = `${currentUsername}님, 안녕하세요`; 
+        document.getElementById('loginStatus').textContent = `${currentUsername}님, 안녕하세요`;
         if (infoText) infoText.style.display = 'none';
-    } 
-    else { 
-        loginForm.style.display = 'block'; 
+    }
+    else {
+        loginForm.style.display = 'block';
         logoutInfo.style.display = 'none';
         if (infoText) infoText.style.display = 'block';
-        localStorage.removeItem('currentUser'); 
+        localStorage.removeItem('currentUser');
     }
 }
 
@@ -529,7 +536,7 @@ function updateAuthUI() {
  */
 function updateMapVisibility() {
     const mapContainer = isLoggedIn ? map : null;
-    
+
     allMarkers.forEach(marker => {
         marker.setMap(mapContainer);
     });
