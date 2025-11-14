@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>일본 맛집 지도</title>
+    <!-- Tailwind CSS CDN 로드 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- 분리된 CSS 파일 로드 -->
+    <link rel="stylesheet" href="css/map-styles.css">
+
+    <!--  분리된 js 파일 로드 -->
+    <script src="js/map-logic.js"></script>
+
+</head>
+<body class="bg-gray-50">
+
+    <div class="container mx-auto px-4 py-6">
+        <header class="mb-6 flex justify-between items-center">
+            <!-- 제목 및 메뉴를 포함하는 좌측 컨테이너 -->
+            <div class="flex items-center space-x-8"> 
+                <h1 class="text-3xl font-bold text-gray-800">
+                    <span class="text-red-500">日本のグルメ</span> マップ
+                </h1>
+
+                <!-- 메뉴 영역 추가 -->
+                <nav class="flex space-x-6">
+                    <!-- '지도 검색' (기본 활성화) -->
+                    <a href="#" class="text-lg font-bold text-red-500 border-b-2 border-red-500 pb-1">マップ検索</a>
+                    <!-- '리스트 검색' -->
+                    <a href="/html/list.html" class="text-lg font-medium text-gray-500 hover:text-red-500 transition duration-150 pb-1">リスト検索</a>
+                </nav>
+            </div>
+            
+            <!-- 로그인/로그아웃 컨테이너 (우측 끝) -->
+            <div id="authContainer" class="flex items-center">
+                <!-- 로그인 버튼 (Modal 트리거) -->
+                <div id="loginForm" style="display:none;">
+                    <button
+                        id="showLoginModalButton"
+                        class="px-4 py-2 bg-red-500 text-white font-semibold rounded-lg hover:bg-red-600 transition duration-150 ease-in-out shadow-md text-sm"
+                    >
+                        ログイン
+                    </button>
+                </div>
+                
+                <!-- 로그아웃 정보 (기본: 숨김) -->
+                <div id="logoutInfo" class="flex space-x-3 items-center" style="display:none;">
+                    <span id="loginStatus" class="text-sm font-bold text-gray-800">ログイン済み</span>
+                    <button
+                        id="formLogoutButton"
+                        class="px-4 py-2 bg-gray-500 text-white font-semibold rounded-lg hover:bg-gray-600 transition duration-150 ease-in-out shadow-md text-sm"
+                    >
+                        ログアウト
+                    </button>
+                </div>
+            </div>
+        </header>
+        
+        <p id="mapInfoText" class="text-center text-sm text-gray-500 mt-1 mb-4">
+            ログインするとマーカーが表示されます。クリックして詳細を確認してください。
+        </p>
+
+        <!-- 구글 지도 컨테이너 -->
+        <div id="map">
+            <div class="h-full w-full flex items-center justify-center bg-gray-200 text-gray-600 text-center">
+                Googleマップを読み込み中... APIキーを確認してください。
+            </div>
+        </div>
+
+    </div>
+    
+    <!-- ========================================================= -->
+    <!-- 로그인 모달/팝업 창 -->
+    <!-- ========================================================= -->
+    <div id="loginModal" class="fixed inset-0 bg-gray-900 bg-opacity-75 hidden items-center justify-center z-50" style="display:none;">
+        <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-sm transform transition duration-300">
+            <h3 class="text-2xl font-bold mb-6 text-gray-800 text-center">ログイン</h3>
+            <div class="space-y-4">
+                <div>
+                    <label for="modalUsername" class="block text-sm font-medium text-gray-700 mb-1">ユーザー名</label>
+                    <!-- 입력 필드는 모달 안에 배치됩니다. -->
+                    <input type="text" id="modalUsername" placeholder="ユーザー名を入力" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500 transition duration-150">
+                </div>
+                <div>
+                    <label for="modalPassword" class="block text-sm font-medium text-gray-700 mb-1">パスワード</label>
+                    <!-- 입력 필드는 모달 안에 배치됩니다. -->
+                    <input type="password" id="modalPassword" placeholder="パスワードを入力" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500 transition duration-150">
+                </div>
+            </div>
+            <div class="flex justify-end space-x-3 mt-6">
+                <!-- 모달 닫기 버튼 -->
+                <button id="modalCloseButton" class="px-4 py-2 text-gray-600 bg-gray-100 rounded-lg hover:bg-gray-200 transition">キャンセル</button>
+                <!-- 모달 로그인 버튼 -->
+                <button id="modalLoginButton" class="px-4 py-2 bg-red-500 text-white font-semibold rounded-lg hover:bg-red-600 transition shadow-md">ログイン</button>
+            </div>
+
+            <!-- 로그인 모달 내부에 회원가입 링크 추가 -->
+            <hr class="my-4 border-gray-200">
+            <p class="text-center text-sm text-gray-600">
+                アカウントをお持ちでない方は 
+                <a href="#" id="openSignUpLink" class="text-red-500 font-semibold hover:text-red-600 transition" 
+                    onclick="event.preventDefault(); handleOpenSignUpFromLogin();">
+                    こちらへ
+                </a>
+            </p>
+        </div>
+    </div>
+
+    <!-- 회원가입 모달 추가 -->
+    <div id="signUpModal" class="fixed inset-0 bg-gray-900 bg-opacity-75 hidden items-center justify-center z-50">
+        <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-sm transform transition duration-300">
+            <h3 class="text-2xl font-bold mb-6 text-gray-800 text-center">新規登録</h3>
+            <div class="space-y-4">
+                <div>
+                    <label for="signUpUsername" class="block text-sm font-medium text-gray-700 mb-1">ID</label>
+                    <input type="text" id="signUpUsername" placeholder="使用するユーザー名 (4～16文字)" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500 transition duration-150">
+                </div>
+                <div>
+                    <label for="signUpPassword" class="block text-sm font-medium text-gray-700 mb-1">パスワード</label>
+                    <input type="password" id="signUpPassword" placeholder="パスワード (8～20文字)" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500 transition duration-150">
+                </div>
+                <div>
+                    <label for="signUpEmail" class="block text-sm font-medium text-gray-700 mb-1">メールアドレス</label>
+                    <input type="email" id="signUpEmail" placeholder="example@email.com" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500 transition duration-150">
+                </div>
+            </div>
+            <div class="flex justify-end space-x-3 mt-6">
+                <button id="signUpModalCloseButton" class="px-4 py-2 text-gray-600 bg-gray-100 rounded-lg hover:bg-gray-200 transition">キャンセル</button>
+                <button id="signUpButton" class="px-4 py-2 bg-red-500 text-white font-semibold rounded-lg hover:bg-red-600 transition shadow-md">登録する</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ========================================================= -->
+
+    <!-- Google Maps API 스크립트 로드 -->
+    <!-- !!! 중요 !!! 'AIzaSyCVJOaGXjdQW8C2N850MnVWeQ05bRBJQnY'를 본인의 실제 Google API 키로 교체해야 합니다. -->
+    <script async
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVJOaGXjdQW8C2N850MnVWeQ05bRBJQnY&callback=initMap">
+    </script>
+</body>
+</html>
