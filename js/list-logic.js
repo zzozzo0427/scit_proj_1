@@ -31,7 +31,7 @@ function checkLoginStatus() {
     
     if (!currentUsername) {
         alert("🔒 このページはログインされたユーザーのみアクセス可能です。ログインページに移動します。");
-        window.location.href = '../map.html'; 
+        window.location.href = '../index.html'; 
         return false;
     }
     
@@ -48,7 +48,7 @@ function checkLoginStatus() {
 function handleLogout() {
     localStorage.removeItem('currentUser');
     alert("ログアウトしました。");
-    window.location.href = '../map.html'; 
+    window.location.href = '../index.html'; 
 }
 
 
@@ -116,11 +116,11 @@ function generateTableHTML(data, isSorted) {
         <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-red-50">
                 <tr class="text-center"> 
-                    <th class="px-6 py-3 text-sm font-medium text-black-600 uppercase tracking-wider w-1/12">NO.</th>
-                    <th class="px-6 py-3 text-sm font-medium text-black-600 uppercase tracking-wider w-3/12">店名</th>
-                    <th class="px-6 py-3 text-sm font-medium text-black-600 uppercase tracking-wider w-3/12">カテゴリー</th>
-                    <th class="px-6 py-3 text-sm font-medium text-black-600 uppercase tracking-wider w-3/12">営業時間</th>
-                    <th class="px-6 py-3 text-sm font-medium uppercase tracking-wider w-2/12 ${ratingHeaderClass} bg-yellow-50">評価</th>
+                    <th class="px-6 py-3 text-base font-medium text-black-700 uppercase tracking-wider w-1/12">NO.</th>
+                    <th class="px-6 py-3 text-base font-medium text-black-700 uppercase tracking-wider w-3/12">店名</th>
+                    <th class="px-6 py-3 text-base font-medium text-black-700 uppercase tracking-wider w-3/12">カテゴリー</th>
+                    <th class="px-6 py-3 text-base font-medium text-black-700 uppercase tracking-wider w-3/12">営業時間</th>
+                    <th class="px-6 py-3 text-base font-medium uppercase tracking-wider w-2/12 ${ratingHeaderClass} bg-yellow-50">評価 (/5.0)</th>
                 </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
@@ -129,15 +129,15 @@ function generateTableHTML(data, isSorted) {
     data.forEach((item, index) => {
         const displayNo = index + 1; 
         const formattedTime = item.time ? item.time.replace(/\n/g, '<br>') : 'N/A';
-        const reviewDisplay = item.review ? `${item.review.toFixed(1)} / 5.0` : 'N/A';
+        const reviewDisplay = item.review ? `${item.review.toFixed(1)}` : 'N/A';
 
         tableHTML += `
             <tr class="hover:bg-gray-50 text-center">
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${displayNo}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${item.name}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${item.category || 'N/A'}</td>
-                <td class="px-6 py-4 text-sm text-gray-500">${formattedTime}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-red-600">${reviewDisplay}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-base font-medium text-gray-700">${displayNo}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-base font-medium text-gray-700">${item.name}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-base text-gray-500">${item.category || 'N/A'}</td>
+                <td class="px-6 py-4 text-base text-gray-500">${formattedTime}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-base font-bold text-red-600">${reviewDisplay}</td>
             </tr>
         `;
     });
@@ -149,9 +149,6 @@ function generateTableHTML(data, isSorted) {
     return tableHTML;
 }
 
-/**
- * 데이터를 받아 카드뉴스 HTML 문자열을 생성합니다. (1줄 3개씩)
- */
 /**
  * 데이터를 받아 카드뉴스 HTML 문자열을 생성합니다. (1줄 3개씩)
  */
@@ -181,7 +178,7 @@ function generateCardHTML(data) {
                 medalEmoji = '🥉'; // 3위
             }
             
-            // 🚨 수정: <span> 태그로 감싸 text-3xl로 크기를 강제하고, 오른쪽에 여백(mr-2)을 추가합니다.
+            // <span> 태그로 감싸 text-3xl로 크기를 강제하고, 오른쪽에 여백(mr-2)을 추가합니다.
             medalIconHTML = `<span class="text-3xl mr-2">${medalEmoji}</span>`;
         }
         
@@ -199,10 +196,10 @@ function generateCardHTML(data) {
                     </div>
                     
                     <div class="p-4 flex-grow">
-                        <h3 class="text-xl font-bold text-red-600 mb-3">${medalIconHTML}${shop.name}</h3>             
-                        <p class="text-base text-gray-700 mb-2"><strong>カテゴリ: </strong> ${shop.category || 'N/A'}</p>
-                        <p class="text-base text-gray-700 mb-3"><strong>評価: </strong> <span>${reviewDisplay}</span></p>
-                        <p class="text-sm text-gray-500 mt-2"><strong>営業時間: </strong>${formattedTime}</p>
+                        <h3 class="text-xl font-bold text-red-900 mb-3">${medalIconHTML}${shop.name}</h3>             
+                        <p class="text-base text-gray-800 mb-2"><strong>カテゴリ: </strong> ${shop.category || 'N/A'}</p>
+                        <p class="text-base text-gray-800 mb-3"><strong>評価: </strong> <span>${reviewDisplay}</span></p>
+                        <p class="text-sm text-gray-800 mt-2"><strong>営業時間: </strong>${formattedTime}</p>
                     </div>
                 </div>
             </div>

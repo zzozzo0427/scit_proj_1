@@ -130,8 +130,8 @@ window.initMap = async () => {
         // 오류 처리 (원본과 동일)
         console.error('Google Map Initialization Error:', error);
         document.getElementById('map').innerHTML = `<div class="h-full w-full flex items-center justify-center bg-gray-200 text-red-600 text-center p-8">
-                <p class="text-xl font-bold">지도 로드 실패!</p><br/>
-                <p>API 키가 유효한지 확인해주세요.</p>
+                <p class="text-xl font-bold">地図の読み込みに失敗しました！</p><br/>
+                <p>APIキーが有効か確認してください。</p>
             </div>`;
     }
 };
@@ -216,7 +216,7 @@ function getStarRatingHtml(score) {
         }
     }
 
-    // 4. 붉은색/회색 스타일을 입혀 반환 (레퍼런스 참고)
+    // 4. 붉은색/회색 스타일을 입혀 반환
     return `
         <span style="color: #ef4444; font-size: 1.1rem; line-height: 1; white-space: nowrap;">${starsHtml}</span>
     `;
@@ -251,8 +251,8 @@ function addGourmetMarker(shop, location, reviews) {
         reviewsHtml = reviews.map(r => {
             const recommendHtml = r.Recommend
                 ? `<p style="font-size: 13px; color: #c45d00; background: #fffbeb; padding: 4px 8px; border-radius: 4px; margin-top: 6px; margin-bottom: 0;">
-                       <strong>おすすめ:</strong> ${r.Recommend}
-                  </p>` // [수정] '추천' -> 'おすすめ'
+                        <strong>おすすめ:</strong> ${r.Recommend}
+                    </p>`
                 : '';
             const scoreText = r.review_score ? `${r.review_score.toFixed(1)}` : 'N/A';
             const comment = r.review_test.replace(/\n/g, '<br>');
@@ -274,7 +274,7 @@ function addGourmetMarker(shop, location, reviews) {
         }).join('');
     }
     
-    // [수정됨] 가로폭을 450px로 늘림
+    // 가로폭을 450px로 늘림
     const reviewPageHtml = `
         <div id="${reviewPageId}" style="display: none; padding: 10px 15px; width: 450px; max-height: 280px; overflow-y: auto; font-family: 'Inter', sans-serif; line-height: 1.4;">
             
@@ -519,7 +519,7 @@ function updateAuthUI() {
     if (isLoggedIn && currentUsername) {
         loginForm.style.display = 'none';
         logoutInfo.style.display = 'flex';
-        document.getElementById('loginStatus').textContent = `${currentUsername}님, 안녕하세요`;
+        document.getElementById('loginStatus').textContent = `${currentUsername}様、ようこそ`;
         if (infoText) infoText.style.display = 'none';
     }
     else {
