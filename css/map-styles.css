@@ -48,3 +48,187 @@
         .gm-style-iw-d {
             overflow: hidden !important; 
         }
+
+        /* ==============================================
+   Google Maps InfoWindow (가게 마커) 스타일
+   ============================================== */
+
+/* --- 공통 컨테이너 --- */
+.gm-iw-container {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.4;
+    width: 450px;
+    box-sizing: border-box; /* 패딩이 너비에 포함되도록 설정 */
+}
+
+/* --- 1. 가게 정보 페이지 --- */
+.gm-iw-info-page {
+    display: flex;
+    padding: 15px;
+}
+
+.gm-iw-info-left {
+    flex: 1;
+    min-width: 0; /* flex 아이템이 줄어들 수 있도록 */
+    padding-right: 15px;
+}
+
+.gm-iw-info-right {
+    width: 180px;
+    flex-shrink: 0; /* 오른쪽 컬럼 너비 고정 */
+}
+
+.gm-iw-shop-name {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: rgb(127, 29, 29);
+    margin: 0 0 4px 0;
+}
+
+.gm-iw-rating-box {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 12px;
+    flex-wrap: wrap; /* 너비가 좁을 때 줄바꿈 */
+}
+
+.gm-iw-rating-score {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #ef4444; /* 붉은색 점수 */
+}
+
+.gm-iw-rating-divider {
+    color: #888;
+    font-size: 12px;
+    margin-left: 2px;
+}
+
+.gm-iw-review-btn {
+    background: none;
+    border: none;
+    color: #007bff;
+    font-size: 12px;
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 2px;
+}
+
+.gm-iw-details {
+    font-size: 11px;
+    color: #333;
+    line-height: 1.6;
+}
+
+.gm-iw-details p {
+    margin: 4px 0;
+}
+
+.gm-iw-details-phone {
+    color: #007749;
+    font-weight: 600;
+}
+
+.gm-iw-shop-image {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+/* --- 2. 리뷰 페이지 --- */
+.gm-iw-review-page {
+    display: none; /* 기본 숨김 */
+    padding: 10px 15px;
+    max-height: 280px;
+    overflow-y: auto;
+}
+
+.gm-iw-review-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+}
+
+.gm-iw-back-btn {
+    background: #f3f4f6;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+    line-height: 1;
+    margin-right: 10px;
+}
+
+.gm-iw-review-title {
+    font-weight: 700;
+    font-size: 1.0rem;
+    color: rgb(127, 29, 29);
+    margin: 0;
+}
+
+.gm-iw-review-count {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #6b7280;
+    margin-left: 4px;
+}
+
+.gm-iw-no-reviews {
+    font-size: 14px;
+    color: #6b7280;
+    margin: 0;
+}
+
+/* --- 2-1. 개별 리뷰 아이템 --- */
+.gm-iw-review-item {
+    border-top: 1px solid #e5e7eb;
+    padding-top: 10px;
+    margin-top: 10px;
+}
+
+.gm-iw-review-item-header {
+    font-weight: 600;
+    color: #1f2937;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.gm-iw-review-date {
+    font-weight: 400;
+    color: #6b7280;
+    font-size: 13px;
+}
+
+.gm-iw-review-score {
+    margin: 3px 0;
+    font-size: 14px;
+    color: #4b5563;
+}
+
+.gm-iw-review-comment {
+    font-size: 14px;
+    color: #4b5563;
+    margin-top: 5px;
+    margin-bottom: 0;
+    line-height: 1.5;
+    /* 줄바꿈(white-space)은 JS에서 <br>로 처리하므로 CSS 불필요 */
+}
+
+.gm-iw-review-recommend {
+    font-size: 13px;
+    color: #c45d00;
+    background: #fffbeb;
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin-top: 6px;
+    margin-bottom: 0;
+}

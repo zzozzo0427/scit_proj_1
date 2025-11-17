@@ -223,7 +223,7 @@ function getStarRatingHtml(score) {
 }
 
 /**
- * [최종 수정] - 2단 레이아웃 복귀
+ * [최종 수정] - 2단 레이아웃 복귀 (CSS 클래스 분리 버전)
  * @param {Object} shop - shops.json의 개별 가게 데이터
  * @param {google.maps.LatLng} location - 위도/경도 객체
  * @param {Array<Object>} reviews - 해당 shop의 리뷰 목록
@@ -246,26 +246,27 @@ function addGourmetMarker(shop, location, reviews) {
     const backBtnId = `btn_back_${uniqueId}`;
 
     // --- 1. 리뷰 페이지 HTML ---
-    let reviewsHtml = `<p style="font-size: 14px; color: #6b7280; margin: 0;">登録されたレビューがありません。</p>`;
+    let reviewsHtml = `<p class="gm-iw-no-reviews">登録されたレビューがありません。</p>`;
     if (reviews.length > 0) {
         reviewsHtml = reviews.map(r => {
             const recommendHtml = r.Recommend
-                ? `<p style="font-size: 13px; color: #c45d00; background: #fffbeb; padding: 4px 8px; border-radius: 4px; margin-top: 6px; margin-bottom: 0;">
-                        <strong>おすすめ:</strong> ${r.Recommend}
-                    </p>`
+                ? `<p class="gm-iw-review-recommend">
+                       <strong>おすすめ:</strong> ${r.Recommend}
+                   </p>`
                 : '';
             const scoreText = r.review_score ? `${r.review_score.toFixed(1)}` : 'N/A';
             const comment = r.review_test.replace(/\n/g, '<br>');
+            
             return `
-            <div style="border-top: 1px solid #e5e7eb; padding-top: 10px; margin-top: 10px;">
-                <p style="font-weight: 600; color: #1f2937; margin: 0; display: flex; justify-content: space-between; align-items: center;">
+            <div class="gm-iw-review-item">
+                <p class="gm-iw-review-item-header">
                     <span>${r.user_id}</span>
-                    <span style="font-weight: 400; color: #6b7280; font-size: 13px;">${r.update_date}</span>
+                    <span class="gm-iw-review-date">${r.update_date}</span>
                 </p>
-                <p style="margin: 3px 0; font-size: 14px; color: #4b5563;">
+                <p class="gm-iw-review-score">
                     (評価: ${scoreText} / 5)
                 </p> 
-                <p style="font-size: 14px; color: #4b5563; margin-top: 5px; margin-bottom: 0; line-height: 1.5;">
+                <p class="gm-iw-review-comment">
                     ${comment}
                 </p>
                 ${recommendHtml}
@@ -274,19 +275,19 @@ function addGourmetMarker(shop, location, reviews) {
         }).join('');
     }
     
-    // 가로폭을 450px로 늘림
+    // [CSS 분리] gm-iw-container, gm-iw-review-page 클래스 등 적용
     const reviewPageHtml = `
-        <div id="${reviewPageId}" style="display: none; padding: 10px 15px; width: 450px; max-height: 280px; overflow-y: auto; font-family: 'Inter', sans-serif; line-height: 1.4;">
+        <div id="${reviewPageId}" class="gm-iw-container gm-iw-review-page">
             
-            <div style="display: flex; align-items: center; justify-content: flex-start; margin-bottom: 10px;">
+            <div class="gm-iw-review-header">
                 
-                <button id="${backBtnId}" style="background: #f3f4f6; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 14px; font-weight: 600; color: #374151; line-height: 1; margin-right: 10px;">
+                <button id="${backBtnId}" class="gm-iw-back-btn">
                     ◀
                 </button>
 
-                <h3 style="font-weight: 700; font-size: 1.0rem; color: #1f2937; margin: 0;">
+                <h3 class="gm-iw-review-title">
                     ${shop.name} - レビュー
-                    <span style="font-size: 0.85rem; font-weight: 500; color: #6b7280; margin-left: 4px;">(${reviews.length}件)</span>
+                    <span class="gm-iw-review-count">(${reviews.length}件)</span>
                 </h3>
             </div>
 
@@ -299,42 +300,42 @@ function addGourmetMarker(shop, location, reviews) {
     const addressHtml = shop.address.replace(/\n/g, '<br>');
     const timeHtml = shop.time.replace(/\n/g, '<br>');
     const shopScoreText = shop.review ? `${shop.review.toFixed(1)}` : 'N/A';
-    const shopScoreStarsHtml = getStarRatingHtml(shop.review); // 붉은색 별점
+    const shopScoreStarsHtml = getStarRatingHtml(shop.review); // 붉은색 별점 (이 함수도 필요시 CSS 클래스 사용)
 
-    // [최종 수정됨] 2단 레이아웃 [왼쪽: 모든 텍스트 | 오른쪽: 사진]
+    // [CSS 분리] gm-iw-container, gm-iw-info-page 클래스 등 적용
     const infoPageHtml = `
-        <div id="${infoPageId}" style="display: flex; padding: 15px; width: 450px; font-family: 'Inter', sans-serif; line-height: 1.4;">
+        <div id="${infoPageId}" class="gm-iw-container gm-iw-info-page">
             
-            <div style="flex: 1; min-width: 0; padding-right: 15px;">
+            <div class="gm-iw-info-left">
                 
-                <h2 style="font-size: 1.3rem; font-weight: 700; color: #333; margin: 0 0 4px 0;">
+                <h2 class="gm-iw-shop-name">
                     ${shop.name}
                 </h2>
                 
-                <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 12px; flex-wrap: wrap;">
-                    <span style="font-size: 1.1rem; font-weight: 700; color: #ef4444;">${shopScoreText}</span>
+                <div class="gm-iw-rating-box">
+                    <span class="gm-iw-rating-score">${shopScoreText}</span>
                     ${shopScoreStarsHtml}
-                    <span style="color: #888; font-size: 12px; margin-left: 2px;">|</span>
-                    <button id="${viewBtnId}" style="background: none; border: none; color: #007bff; font-size: 12px; text-decoration: underline; cursor: pointer; padding: 0; margin-left: 2px;">
+                    <span class="gm-iw-rating-divider">|</span>
+                    <button id="${viewBtnId}" class="gm-iw-review-btn">
                         レビュー ${reviews.length}件
                     </button>
                 </div>
 
-                <div style="font-size: 11px; color: #333; line-height: 1.6;">
-                    <p style="margin: 4px 0;"><strong>住所:</strong> ${addressHtml}</p>
-                    <p style="margin: 4px 0;"><strong>電話:</strong> <span style="color: #007749; font-weight: 600;">${shop.phone}</span></p>
-                    <p style="margin: 4px 0;"><strong>カテゴリー:</strong> ${shop.category}</p>
-                    <p style="margin: 4px 0;"><strong>価格帯:</strong> ${shop.price}</p>
-                    <p style="margin: 4px 0;"><strong>営業時間:</strong> ${timeHtml}</p>
+                <div class="gm-iw-details">
+                    <p><strong>住所:</strong> ${addressHtml}</p>
+                    <p><strong>電話:</strong> <span class="gm-iw-details-phone">${shop.phone}</span></p>
+                    <p><strong>カテゴリー:</strong> ${shop.category}</p>
+                    <p><strong>価格帯:</strong> ${shop.price}</p>
+                    <p><strong>営業時間:</strong> ${timeHtml}</p>
                 </div>
 
             </div>
 
-            <div style="width: 180px; flex-shrink: 0;">
+            <div class="gm-iw-info-right">
                 <img src="${imagePath}" 
-                    alt="${shop.name}" 
-                    style="width: 100%; height: 160px; object-fit: cover; border-radius: 6px;"
-                    onerror="this.style.display='none';"
+                     alt="${shop.name}" 
+                     class="gm-iw-shop-image"
+                     onerror="this.style.display='none';"
                 >
             </div>
 
@@ -349,14 +350,16 @@ function addGourmetMarker(shop, location, reviews) {
         disableAutoPan: true 
     });
 
-    // domready 이벤트 (이전과 동일)
+    // --- 4. 이벤트 리스너 ---
+    // (이 부분은 CSS 클래스로 제어해도 되지만, 
+    // 기존 로직(인라인 style.display 변경)이 이미 잘 동작하므로 그대로 둡니다.)
     infoWindow.addListener('domready', () => {
         const viewBtn = document.getElementById(viewBtnId);
         if (viewBtn) {
             viewBtn.addEventListener('click', () => {
-                document.getElementById(infoPageId).style.display = 'block'; // 'flex' -> 'block'
+                // 리뷰 페이지 보이기 (block으로)
                 document.getElementById(reviewPageId).style.display = 'block';
-                // [수정] 'block'으로 변경
+                // 정보 페이지 숨기기
                 document.getElementById(infoPageId).style.display = 'none';
             });
         }
@@ -364,13 +367,15 @@ function addGourmetMarker(shop, location, reviews) {
         const backBtn = document.getElementById(backBtnId);
         if (backBtn) {
             backBtn.addEventListener('click', () => {
-                document.getElementById(infoPageId).style.display = 'flex'; // ★★★ 여기를 'flex'로 복원
+                // 정보 페이지 보이기 (flex로)
+                document.getElementById(infoPageId).style.display = 'flex';
+                // 리뷰 페이지 숨기기
                 document.getElementById(reviewPageId).style.display = 'none';
             });
         }
     });
 
-    // 마커 클릭 시, 기존 인포윈도우 닫고 새 인포윈도우 열기 (이전과 동일)
+    // 마커 클릭 시 (이전과 동일)
     marker.addListener("click", () => {
         if (isLoggedIn) {
             if (currentInfoWindow) {
@@ -384,7 +389,7 @@ function addGourmetMarker(shop, location, reviews) {
         }
     });
 
-    // 인포윈도우 닫힐 때 추적 변수 초기화 (이전과 동일)
+    // 인포윈도우 닫힐 때 (이전과 동일)
     infoWindow.addListener('closeclick', () => {
         currentInfoWindow = null;
     });
