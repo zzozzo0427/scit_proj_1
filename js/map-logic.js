@@ -24,7 +24,7 @@ const initialUsers = [
     { id: "siwon", password: "siwon1234", email: "siwon@gmail.com" },
     { id: "somin", password: "somin1234", email: "somin@naver.com" },
     { id: "mingi", password: "mingi1234", email: "mingi@naver.com" },
-    { id: "hyoju", password: "hyoju1234", email: "hyoju@gmail.com" }
+    { id: "hyojoo", password: "hyojoo1234", email: "hyoju@gmail.com" }
 ];
 
 /**
