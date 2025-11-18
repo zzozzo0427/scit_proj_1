@@ -189,38 +189,32 @@ function processShopData(shops, reviews) {
     }
 }
 
-/**
- * [수정된 함수] - 반올림 방식의 '붉은색' 별점
- * 숫자 평점을 '반올림'하여 간단한 별(★/☆) HTML로 변환합니다.
- * @param {number} score - 평점 (예: 4.6)
- * @returns {string} - 예: "★★★★☆"
- */
 function getStarRatingHtml(score) {
-    // 1. 숫자가 아니거나 null이면 빈 문자열 반환
     if (isNaN(score) || score === null) {
         return '<span style="color: #e0e0e0; font-size: 13px;">평가 없음</span>';
     }
 
-    // 2. 점수를 가장 가까운 정수(full number)로 반올림 (예: 4.6 -> 5, 4.2 -> 4)
-    const roundedScore = Math.round(score);
+    // 0.5 단위로: 4.0~4.4 → 4.0, 4.5~4.9 → 4.5
+    const roundedScore = Math.floor(score * 2) / 2;
 
     let starsHtml = '';
     const maxStars = 5;
 
-    // 3. 5번 반복
     for (let i = 1; i <= maxStars; i++) {
-        if (i <= roundedScore) {
-            starsHtml += '★'; // 꽉 찬 별
+        if (i <= Math.floor(roundedScore)) {
+            starsHtml += '★';
+        } else if (i === Math.ceil(roundedScore) && roundedScore % 1 !== 0) {
+            starsHtml += '⯨';
         } else {
-            starsHtml += '☆'; // 빈 별
+            starsHtml += '☆';
         }
     }
 
-    // 4. 붉은색/회색 스타일을 입혀 반환
     return `
         <span style="color: #ef4444; font-size: 1.1rem; line-height: 1; white-space: nowrap;">${starsHtml}</span>
     `;
 }
+
 
 /**
  * [최종 수정] - 2단 레이아웃 복귀 (CSS 클래스 분리 버전)
