@@ -19,7 +19,7 @@ let signUpModal;
 let openSignUpLink;
 let signUpModalCloseButton;
 
-// 임시 사용자 목록 (원본과 동일)
+// 임시 사용자 목록
 const initialUsers = [
     { id: "siwon", password: "siwon1234", email: "siwon@gmail.com" },
     { id: "somin", password: "somin1234", email: "somin@naver.com" },
@@ -59,7 +59,7 @@ async function fetchAllData() {
 // 지도 초기화 함수 (window.initMap)
 window.initMap = async () => {
     try {
-        // Local Storage에 초기 사용자 목록 저장 (원본과 동일)
+        // Local Storage에 초기 사용자 목록 저장
         if (localStorage.getItem('user_siwon') === null) {
             console.log("Local Storage에 초기 사용자 목록 저장 중...");
             initialUsers.forEach(user => {
@@ -69,7 +69,7 @@ window.initMap = async () => {
             });
         }
 
-        // UI 요소 초기화 (원본과 동일)
+        // UI 요소 초기화
         loginForm = document.getElementById('loginForm');
         logoutInfo = document.getElementById('logoutInfo');
         loginModal = document.getElementById('loginModal');
@@ -80,11 +80,11 @@ window.initMap = async () => {
         openSignUpLink = document.getElementById('openSignUpLink');
         signUpModalCloseButton = document.getElementById('signUpModalCloseButton');
 
-        // --- [수정됨] JSON 데이터 비동기 로드 ---
+        // --- JSON 데이터 비동기 로드 ---
         const { shops, reviews } = await fetchAllData();
         // --- JSON 데이터 로드 끝 ---
 
-        // 지도 초기 위치 (원본과 동일)
+        // 지도 초기 위치
         const initialPosition = { lat: 35.0, lng: 134.0 };
         const mapOptions = {
             center: initialPosition,
@@ -94,7 +94,7 @@ window.initMap = async () => {
 
         map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
-        // [추가!] 지도를 클릭하면 열려있는 인포윈도우를 닫는 리스너
+        // 지도를 클릭하면 열려있는 인포윈도우를 닫는 리스너
         map.addListener('click', () => {
             if (currentInfoWindow) {
                 currentInfoWindow.close();
@@ -102,14 +102,14 @@ window.initMap = async () => {
             }
         });
 
-        // 1. [수정됨] JSON의 lat/lng로 마커 생성 (예외 처리 포함)
+        // 1. JSON의 lat/lng로 마커 생성 (예외 처리 포함)
         processShopData(shops, reviews);
 
-        // 2. 초기 로그인 상태 UI/마커 업데이트 (원본과 동일)
+        // 2. 초기 로그인 상태 UI/마커 업데이트
         updateAuthUI();
         updateMapVisibility();
 
-        // 3. 이벤트 리스너 설정 (원본과 동일)
+        // 3. 이벤트 리스너 설정
         showLoginModalButton.addEventListener('click', openLoginModal);
         modalCloseButton.addEventListener('click', closeLoginModal);
         openSignUpLink.addEventListener('click', handleOpenSignUpFromLogin);
@@ -127,7 +127,7 @@ window.initMap = async () => {
         document.getElementById('formLogoutButton').addEventListener('click', handleLogout);
 
     } catch (error) {
-        // 오류 처리 (원본과 동일)
+        // 오류 처리
         console.error('Google Map Initialization Error:', error);
         document.getElementById('map').innerHTML = `<div class="h-full w-full flex items-center justify-center bg-gray-200 text-red-600 text-center p-8">
                 <p class="text-xl font-bold">地図の読み込みに失敗しました！</p><br/>
@@ -245,8 +245,8 @@ function addGourmetMarker(shop, location, reviews) {
         reviewsHtml = reviews.map(r => {
             const recommendHtml = r.Recommend
                 ? `<p class="gm-iw-review-recommend">
-                       <strong>おすすめ:</strong> ${r.Recommend}
-                   </p>`
+                        <strong>おすすめ:</strong> ${r.Recommend}
+                    </p>`
                 : '';
             const scoreText = r.review_score ? `${r.review_score.toFixed(1)}` : 'N/A';
             const comment = r.review_test.replace(/\n/g, '<br>');
@@ -327,9 +327,9 @@ function addGourmetMarker(shop, location, reviews) {
 
             <div class="gm-iw-info-right">
                 <img src="${imagePath}" 
-                     alt="${shop.name}" 
-                     class="gm-iw-shop-image"
-                     onerror="this.style.display='none';"
+                    alt="${shop.name}" 
+                    class="gm-iw-shop-image"
+                    onerror="this.style.display='none';"
                 >
             </div>
 
@@ -392,13 +392,16 @@ function addGourmetMarker(shop, location, reviews) {
 }
 
 // =========================================================
-// 모달 제어 함수 (원본과 동일)
+// 모달 제어 함수
 // =========================================================
+
+// 로그인 모달을 화면에 표시
 function openLoginModal() {
     loginModal.classList.remove('hidden');
     loginModal.style.display = 'flex';
 }
 
+// 로그인 모달을 숨기고, 입력 필드 초기화
 function closeLoginModal() {
     loginModal.style.display = 'none';
     loginModal.classList.add('hidden');
@@ -406,11 +409,13 @@ function closeLoginModal() {
     document.getElementById('modalPassword').value = '';
 }
 
+// 회원가입 모달을 화면에 표시
 function openSignUpModal() {
     signUpModal.classList.remove('hidden');
     signUpModal.style.display = 'flex';
 }
 
+// 회원가입 모달을 숨기고, 입력 필드 초기화
 function closeSignUpModal() {
     signUpModal.style.display = 'none';
     signUpModal.classList.add('hidden');
@@ -419,6 +424,7 @@ function closeSignUpModal() {
     document.getElementById('signUpEmail').value = '';
 }
 
+// 로그인 모달을 닫고 회원가입 모달 표시
 function handleOpenSignUpFromLogin(e) {
     closeLoginModal();
     openSignUpModal();
@@ -428,6 +434,13 @@ function handleOpenSignUpFromLogin(e) {
 // 회원가입 및 로그인/로그아웃 로직 (원본과 동일)
 // =========================================================
 
+/**
+ * 회원가입 폼의 사용자 이름, 비밀번호, 이메일의 유효성 검사
+ * @param {string} username - 사용자 이름
+ * @param {string} password - 비밀번호
+ * @param {string} email - 이메일 주소
+ * @returns {boolean} - 유효성 검사 통과 여부
+ */
 function validateForm(username, password, email) {
     const usernameRegex = /^[a-zA-Z0-9]{4,16}$/;
     if (!usernameRegex.test(username)) {
@@ -447,6 +460,10 @@ function validateForm(username, password, email) {
     return true;
 }
 
+/**
+ * 회원가입을 처리하고 성공 시 즉시 로그인 상태로 전환
+ * @returns {void}
+ */
 function handleSignUp() {
     const username = document.getElementById('signUpUsername').value;
     const password = document.getElementById('signUpPassword').value;
@@ -474,6 +491,10 @@ function handleSignUp() {
     updateMapVisibility();
 }
 
+/**
+ * 사용자 로그인을 처리하고 인증에 성공하면 로그인 상태로 전환
+ * @returns {void}
+ */
 function handleLogin() {
     const username = document.getElementById('modalUsername').value;
     const password = document.getElementById('modalPassword').value;
@@ -498,6 +519,10 @@ function handleLogin() {
     updateMapVisibility();
 }
 
+/**
+ * 로그아웃을 처리하고 로그인 상태를 해제하고 UI와 마커 가시성 갱신
+ * @returns {void}
+ */
 function handleLogout() {
     isLoggedIn = false;
     localStorage.removeItem('currentUser');
@@ -505,6 +530,10 @@ function handleLogout() {
     updateMapVisibility();
 }
 
+/**
+ * 로그인 상태에 따라 지도 페이지 상단의 UI 요소(로그인 폼, 로그아웃 정보)를 갱신
+ * @returns {void}
+ */
 function updateAuthUI() {
     const currentUsername = localStorage.getItem('currentUser');
     const infoText = document.getElementById('mapInfoText');

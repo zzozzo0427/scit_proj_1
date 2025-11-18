@@ -100,7 +100,7 @@ async function loadAndProcessData() {
 // =========================================================
 
 /**
- * 데이터를 받아 테이블 HTML 문자열을 생성합니다. (CSS 수정 반영)
+ * 데이터를 받아 테이블 HTML 문자열을 생성합니다.
  */
 function generateTableHTML(data, isSorted) {
     if (!data || data.length === 0) {
@@ -167,7 +167,7 @@ function generateCardHTML(data) {
         const globalIndex = startIndex + pageIndex;
         let medalIconHTML = ''; // HTML이 담길 변수명으로 변경
         
-        // 가게명 앞에 삽입할 메달 아이콘 결정
+        // 가게명 앞에 메달 아이콘 삽입
         if (isSortedByRating && globalIndex < 3) {
             let medalEmoji = '';
             if (globalIndex === 0) {
@@ -178,13 +178,12 @@ function generateCardHTML(data) {
                 medalEmoji = '🥉'; // 3위
             }
             
-            // <span> 태그로 감싸 text-3xl로 크기를 강제하고, 오른쪽에 여백(mr-2)을 추가합니다.
+            // 이모지 html 태그
             medalIconHTML = `<span class="text-3xl mr-2">${medalEmoji}</span>`;
         }
         
         const imagePath = `../images/${shop.shop_id}.jpg`; 
         const reviewDisplay = shop.review ? `${shop.review.toFixed(1)} / 5.0` : 'N/A';
-        // 이전에 <br>로 변환되던 부분이 shop.time 그대로 출력되도록 되어있어 다시 수정합니다.
         const formattedTime = shop.time ? shop.time : 'N/A'; 
 
         return `
@@ -210,7 +209,7 @@ function generateCardHTML(data) {
 }
 
 /**
- * 페이지 네비게이션 버튼을 생성합니다.
+ * 페이지 네비게이션 버튼 생성
  */
 function renderPagination(data) {
     const totalItems = data.length;
@@ -250,7 +249,7 @@ function renderPagination(data) {
 }
 
 /**
- * 카드뷰를 렌더링하고 페이지네이션을 업데이트합니다.
+ * 카드뷰를 렌더링하고 페이지네이션
  */
 function renderCardView(data) {
     currentFilteredData = data;
@@ -260,7 +259,7 @@ function renderCardView(data) {
 
 
 /**
- * '검색' 버튼 클릭 시 지역별 데이터를 표시합니다.
+ * '검색' 버튼 클릭 시 지역별 데이터 표시
  */
 function handleListSearch() {
     const selectedArea = areaSelect.value;
@@ -304,7 +303,7 @@ function handleListSearch() {
 }
 
 /**
- * '평점 순 정렬' 버튼 클릭 시 데이터를 정렬하고 다시 표시합니다.
+ * '평점 순 정렬' 버튼 클릭 시 데이터 정렬 및 표시
  */
 function handleSortByRating() {
     const selectedArea = areaSelect.value;
@@ -322,7 +321,7 @@ function handleSortByRating() {
         sortButton.classList.add('bg-yellow-500', 'hover:bg-yellow-600');
 
     } else {
-        // 기본 순서로 돌아가기 (originalIndex를 사용)
+        // 기본 순서로 돌아가기
         data.sort((a, b) => a.originalIndex - b.originalIndex);
         isSortedByRating = false;
         sortButton.textContent = '⭐️ 平点順 並び替え';
@@ -337,14 +336,14 @@ function handleSortByRating() {
     if (displayMode === 'card') {
         renderCardView(currentFilteredData);
     } else {
-        // 테이블 뷰인 경우 테이블을 다시 렌더링 (헤더 색상 변경을 위해)
+        // 테이블 뷰인 경우 테이블을 다시 렌더링 (헤더 색상 변경)
         tableContainer.innerHTML = generateTableHTML(currentFilteredData, isSortedByRating);
     }
 }
 
 
 /**
- * 카드뷰와 테이블뷰 표시를 전환합니다.
+ * 카드뷰와 테이블뷰 표시 전환
  */
 function toggleDisplayMode(e) {
     const button = e.target;
@@ -379,7 +378,7 @@ function toggleDisplayMode(e) {
 // =========================================================
 
 document.addEventListener('DOMContentLoaded', async () => {
-    // DOM이 로드된 후 UI 요소 참조를 수행합니다. 
+    // DOM이 로드된 후 UI 요소 참조를 수행
     areaSelect = document.getElementById('areaSelect');
     searchListButton = document.getElementById('searchListButton');
     tableContainer = document.getElementById('tableContainer'); // ID 변경됨
@@ -388,7 +387,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     sortButton = document.getElementById('sortButton');
     toggleViewButton = document.getElementById('toggleViewButton'); // NEW
 
-    // 1. 페이지 로드 시, 로그인 상태를 확인하고 UI를 업데이트합니다.
+    // 1. 페이지 로드 시, 로그인 상태를 확인하고 UI를 업데이트
     if (checkLoginStatus()) { 
         // 2. 데이터 비동기 로드 시작
         const dataLoaded = await loadAndProcessData(); 
